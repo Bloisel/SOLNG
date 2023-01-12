@@ -1,0 +1,9 @@
+{
+    "files.exclude": {
+        "**/*.a": true,
+        "**/*.o": true
+    },
+    "files.associations": {
+        "so_long.h": "c"
+    }
+}
