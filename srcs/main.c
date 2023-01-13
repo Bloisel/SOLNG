@@ -15,9 +15,10 @@ int main(int argc, char **argv)
         return (1);
     }
     init_data(&dta);
-    ft_putstr_fd("string\n", 1);
-    ft_printf("OUIOUI\n");
-
-
+    read_map(&dta, argv);
+    check_ber(argv, &dta);
+    // if (!dta.error)
+        // exec;
+    ft_exit(&dta);
     return (0);
 }

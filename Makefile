@@ -8,6 +8,9 @@ MLXFLAGS = -framework AppKit -framework OpenGL -L ./minilibx -lmlx -Imlx
 DEBUG = -g -O0
 
 SRCS = srcs/main.c \
+		srcs/read_map.c \
+		srcs/check_ber.c \
+		srcs/ft_exit.c
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -55,6 +58,9 @@ fclean_all:clean
 	rm -rf $(MLXNAME) $(LIBFTNAME) $(OBJS) $(NAME)
 
 re: fclean all
+
+ree: fclean all
+	./so_long maps/map_ok_small.ber
 
 
 # This is a minimal set of ANSI/VT100 color codes
