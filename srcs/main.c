@@ -15,8 +15,11 @@ int main(int argc, char **argv)
         return (1);
     }
     init_data(&dta);
-    read_map(&dta, argv);
     check_ber(argv, &dta);
+    read_map(&dta, argv);
+    // check_map(&dta);
+    // check_map2(&dta);
+    check_map_walls(&dta);
     // if (!dta.error)
         // exec;
     ft_exit(&dta);
