@@ -121,40 +121,50 @@ void check_map_walls(t_data *dta)
 	int j;
 	int x;
 	int y;
-	int z;
 
-	z = 0;
-	x = 0;
 	i = 0;
-	y = ft_strlen(dta->map[i]);
-	i = -1;
+	// y = ft_strlen(dta->map[i]);
+	i = 0;
+	j = 0;
 	while (dta->map[i])
 	{
-		j = 0;
+		x = 0;
 		while (dta->map[i][j])
 		{
 		j++;
 		}
 		i++;
 	}
-	x = i;	
+	x = i;
 	i = 0;
 	j = 0;
 	while (dta->map[i][j] != '\0')
 	{
 		j = 0;
-		while (dta->map[i][j] && j < y)
+		while (dta->map[i][j])
 		{
 		if (dta->map[0][j] != '1')
 		{
-			ft_printf("i = %d\n et j = %d\n",i,j);
-			ft_printf("premier ligne\n");
-			ft_printf("%c\n",dta->map[i][j]);
-			printf_error(dta, "Error : la map n'est pas entouree de wall");
+			ft_printf("Erreur : a la premiere ligne de la map [0][%d]\n",j);
+			// ft_printf("i = %d\n et j = %d\n",i,j);
+			// ft_printf("premier ligne\n");
+			// ft_printf("%c\n",dta->map[i][j]);
+			// printf_error(dta, "Error : la map n'est pas entouree de wall");
 		}
+		if (dta->map[x - 1][j] != '1')
+		{
+			// ft_printf("%d\n",j);
+			ft_printf("Erreur : a la derniere ligne de la map [%d][%d]\n",(x - 1),j);
+		}
+		// 	// ft_printf("i = %d\n et j = %d\n",i,j);
+		// 	// ft_printf("premier ligne\n");
+		// 	// ft_printf("%c\n",dta->map[i][j]);
+		// 	// printf_error(dta, "Error : la map n'est pas entouree de wall");
+		// }
 		j++;
 		}
 	}
+	y = j;
 	i = 0;
 	// ft_printf("valeur de mon j : %d\n",j);
 	//j = z;
@@ -163,21 +173,22 @@ void check_map_walls(t_data *dta)
 		//j = 0;
 		if (dta->map[i][0] != '1')
 		{
-			ft_printf("Erreur : a l'endroit [%d][0] debut de tab\n",i);
+			ft_printf("Erreur : au premier caracteres de la ligne [%d][0] debut de tab\n",i);
 		// 	ft_printf("mon j (char dans la chaine) %d\n",j);
 		// 	ft_printf("mon i (nombre de chaine) %d\n",i);
 		// 	printf_error(dta,"Error : la map n'est pas entouree de wall");
 		// }
-		if (dta->map[i][j - 1] != '1')
+		}
+		if (dta->map[i][y - 1] != '1')
 		{
-			ft_printf("Erreur : a l'endroit [%d][%d] debut de tab\n",i,j);
+			ft_printf("Erreur : au derniere caracteres de la ligne [%d][%d]\n",i,(y - 1));
 			// ft_printf("mon j (char dans la chaine) %d\n",j);
 			// ft_printf("mon i (nombre de chaine) %d\n",i);
 			// printf_error(dta,"Error : la map n'est pas entouree de wall");
 		}
-		}
 	}
 }
+
 	// if (dta->map[i][j] != '1' && dta->map[x][y] != '1')
 		// {
 		// 	ft_printf("i = %d\n et j = %d\n",i,j);
