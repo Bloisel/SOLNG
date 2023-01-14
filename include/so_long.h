@@ -14,7 +14,7 @@ typedef struct s_data
     int error;
 } t_data;
 
-
+void    check_map_rectangle(t_data *dta);
 void    check_map_walls(t_data *dta);
 void    check_map2(t_data *dta);
 void    check_map(t_data *dta);

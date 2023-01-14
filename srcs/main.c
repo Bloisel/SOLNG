@@ -19,6 +19,7 @@ int main(int argc, char **argv)
     read_map(&dta, argv);
     // check_map(&dta);
     // check_map2(&dta);
+    // check_map_rectangle(&dta);
     check_map_walls(&dta);
     // if (!dta.error)
         // exec;
