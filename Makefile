@@ -10,7 +10,8 @@ DEBUG = -g -O0
 SRCS = srcs/main.c \
 		srcs/read_map.c \
 		srcs/check_ber.c \
-		srcs/ft_exit.c
+		srcs/ft_exit.c \
+		srcs/init_window.c 
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -60,7 +61,7 @@ fclean_all:clean
 re: fclean all
 
 ree: fclean all
-	./so_long maps/map_ok_small.ber
+	./so_long maps/map_ok_huge.ber
 
 
 # This is a minimal set of ANSI/VT100 color codes

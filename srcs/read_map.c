@@ -27,7 +27,6 @@ void read_map(t_data *dta, char **argv)
         i++;
     }
     dta->map = ft_split(str,'\n');
-    //ft_printf("%s\n",str);
+    dta->map2 = ft_split(str,'\n');
     free(str);
-    //ft_exit(dta);
 }

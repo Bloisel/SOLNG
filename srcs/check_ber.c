@@ -15,35 +15,42 @@ void check_ber(char **argv, t_data *dta)
 		EXIT_SUCCESS;
 	}
 	else
-	{
 		printf_error(dta,"Error : ce fichier n'est pas un point ber\n");
-	}
 }
 
 void check_map(t_data *dta)
 {
     int i = 0;
     int j = 0;
-    //printf("%s\n",dta);
-    //str = dta->map;
-    while (dta->map[i])
+    
+	while (dta->map[i])
     {
         j = 0;
         while (dta->map[i][j])
         {
             if (dta->map[i][j] == '1' || dta->map[i][j] == '0' || dta->map[i][j] == 'P'
                 || dta->map[i][j] == 'C' || dta->map[i][j] == 'E')
-            {
-				//ft_printf("%c\n",dta->map[i][j]);
-                j++;
-            }
+                	j++;
             else
-            {
                 printf_error(dta,"Error : Mauvais arguments dans la map");
-            }        
         }
         i++;
     }
+}
+
+void check_map_number(t_data *dta, int *e, int *p, int *c)
+{
+	if (*e > 1)
+		printf_error(dta,"Error : too many exit\n");
+	if (*p > 1)
+		printf_error(dta,"Error : too many players\n");
+	if (*c <= 0)
+		printf_error(dta,"Error : missing coin\n");
+	if (*p <= 0)
+		printf_error(dta,"Error : missing player\n");
+	if (*e <= 0)
+		printf_error(dta,"Error : missing exit\n");
+	dta->coinalgo = *c;
 }
 
 void check_map2(t_data *dta)
@@ -69,25 +76,10 @@ void check_map2(t_data *dta)
 				e++;
 			if (dta->map[i][j] == 'P')
 				p++;
-			ft_printf("%c\n",dta->map[i][j]);
 			j++;
 		}
 	}
 	check_map_number(dta, &e, &p ,&c);
-}
-
-void check_map_number(t_data *dta, int *e, int *p, int *c)
-{
-	if (*e > 1)
-		ft_printf("Error : too many exit\n");
-	if (*p > 1)
-		ft_printf("Error : too many players\n");
-	if (*c <= 0)
-		ft_printf("Error : missing coin\n");
-	if (*p <= 0)
-		ft_printf("Error : missing player\n");
-	if (*e <= 0)
-		ft_printf("Error : missing exit\n");
 }
 
 void check_map_rectangle(t_data *dta)
@@ -101,6 +93,7 @@ void check_map_rectangle(t_data *dta)
 	la = 0;
 	l = 0;
 	l = ft_strlen(dta->map[++i]);
+	dta->longeur = l;
 	i = 0;
 	while (dta->map[i])
 	{
@@ -112,6 +105,7 @@ void check_map_rectangle(t_data *dta)
 		i++;
 	}
 	la = i;
+	dta->largeur = la;
 	if (l <= la)
 		printf_error(dta,"Error : la map n'est pas un rectangle");
 }
@@ -122,8 +116,6 @@ void check_map_walls(t_data *dta)
 	int x;
 	int y;
 
-	i = 0;
-	// y = ft_strlen(dta->map[i]);
 	i = 0;
 	j = 0;
 	while (dta->map[i])
@@ -145,54 +137,102 @@ void check_map_walls(t_data *dta)
 		{
 		if (dta->map[0][j] != '1')
 		{
-			ft_printf("Erreur : a la premiere ligne de la map [0][%d]\n",j);
-			// ft_printf("i = %d\n et j = %d\n",i,j);
-			// ft_printf("premier ligne\n");
-			// ft_printf("%c\n",dta->map[i][j]);
-			// printf_error(dta, "Error : la map n'est pas entouree de wall");
+			ft_printf("Error : dans la premiere colonne de la map a la position [0][%d]\n",j);
+			printf_error(dta, "Error : la map n'est pas entouree de wall\n");
 		}
 		if (dta->map[x - 1][j] != '1')
 		{
-			// ft_printf("%d\n",j);
-			ft_printf("Erreur : a la derniere ligne de la map [%d][%d]\n",(x - 1),j);
+			ft_printf("Error : dans la derniere colonne de la map a la position [%d][%d]\n",(x - 1),j);
+			printf_error(dta, "Error : la map n'est pas entouree de wall\n");
 		}
-		// 	// ft_printf("i = %d\n et j = %d\n",i,j);
-		// 	// ft_printf("premier ligne\n");
-		// 	// ft_printf("%c\n",dta->map[i][j]);
-		// 	// printf_error(dta, "Error : la map n'est pas entouree de wall");
-		// }
 		j++;
 		}
 	}
 	y = j;
 	i = 0;
-	// ft_printf("valeur de mon j : %d\n",j);
-	//j = z;
 	while (dta->map[++i])
 	{
-		//j = 0;
 		if (dta->map[i][0] != '1')
 		{
-			ft_printf("Erreur : au premier caracteres de la ligne [%d][0] debut de tab\n",i);
-		// 	ft_printf("mon j (char dans la chaine) %d\n",j);
-		// 	ft_printf("mon i (nombre de chaine) %d\n",i);
-		// 	printf_error(dta,"Error : la map n'est pas entouree de wall");
-		// }
+			ft_printf("Error : au premier caractere de la colonne [%d][0]\n",i);
+			printf_error(dta,"Error : la map n'est pas entouree de wall\n");
 		}
 		if (dta->map[i][y - 1] != '1')
 		{
-			ft_printf("Erreur : au derniere caracteres de la ligne [%d][%d]\n",i,(y - 1));
-			// ft_printf("mon j (char dans la chaine) %d\n",j);
-			// ft_printf("mon i (nombre de chaine) %d\n",i);
-			// printf_error(dta,"Error : la map n'est pas entouree de wall");
+			ft_printf("Error : au derniere caractere de la colonne [%d][%d]\n",i,(y - 1));
+			printf_error(dta,"Error : la map n'est pas entouree de wall\n");
 		}
 	}
 }
 
-	// if (dta->map[i][j] != '1' && dta->map[x][y] != '1')
-		// {
-		// 	ft_printf("i = %d\n et j = %d\n",i,j);
-		// 	ft_printf("%c\n",dta->map[i][j]);
-		// 	ft_printf("dernier chaine de carac");
-		// 	printf_error(dta, "Error : la map n'est pas entouree de wall");
-		// }		
+void check_path2(t_data *dta, int a,int b, int *modif)
+{
+	if	(dta->map2[a + 1][b] == 'C' || dta->map2[a + 1][b] == '0')
+	{
+			dta->map2[a + 1][b] = 'B';
+			*modif += 1;
+	}
+	if	(dta->map2[a - 1][b] == 'C' || dta->map2[a - 1][b] == '0')
+	{
+			dta->map2[a - 1][b] = 'B';
+			*modif += 1;
+	}
+	if	(dta->map2[a][b + 1] == 'C' || dta->map2[a][b + 1] == '0')
+	{
+			dta->map2[a][b + 1] = 'B';
+			*modif += 1;
+	}
+	if	(dta->map2[a][b - 1] == 'C' || dta->map2[a][b - 1] == '0')
+	{
+			dta->map2[a][b - 1] = 'B';
+			*modif += 1;
+	}
+}
+
+void check_valid_path(t_data *dta)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (dta->map2[i])
+	{
+		j = 0;
+		while(dta->map2[i][j]) 
+		{
+			if ((dta->map2[i][j] == 'E' && (dta->map2[i + 1][j] != 'B' && dta->map2[i - 1][j] != 'B')
+				&& (dta->map2[i][j + 1] != 'B' && dta->map2[i][j - 1] != 'B')))
+					printf_error(dta,"Error : chemin impossible pour exit\n");
+			if (dta->map2[i][j] == 'C') 
+					printf_error(dta,"Error : chemin impossible pour coins\n");
+			j++;
+		}
+		i++;
+	}
+}
+
+void check_path(t_data *dta)
+{
+	int i;
+	int j;
+	int d;
+
+	d = 1;
+	while (d != 0)
+	{
+		d = 0;
+		i = 0;
+		while (dta->map2[i])
+		{
+			j = 0;
+			while(dta->map2[i][j]) 
+			{
+				if (dta->map2[i][j] == 'P' || dta->map2[i][j] == 'B')
+					check_path2(dta, i, j, &d);
+				j++;
+			}
+		i++;
+		}
+	}
+	check_valid_path(dta);
+}
