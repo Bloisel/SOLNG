@@ -6,7 +6,7 @@
 /*   By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:01:33 by bloisel           #+#    #+#             */
-/*   Updated: 2023/01/17 17:53:47 by bloisel          ###   ########.fr       */
+/*   Updated: 2023/01/17 17:59:15 by bloisel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include "fcntl.h"
 # include "stdlib.h"
 # include "mlx.h"
-
 
 typedef struct s_img {
 	void	*img;
@@ -58,6 +57,12 @@ typedef struct s_data
 
 void	pose_player(t_data *dta);
 void	init_window(t_data *dta);
+void	print_image(t_data *dta);
+void	move_right(t_data *dta);
+void	move_left(t_data *dta);
+void	move_up(t_data *dta);
+void	move_down(t_data *dta);
+void	exit_possible(t_data *dta);
 void	check_path2(t_data *dta, int a, int b, int *modif);
 void	check_path(t_data *dta);
 void	check_map_rectangle(t_data *dta);
