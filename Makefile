@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: bloisel <bloisel@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/01/17 13:01:59 by bloisel           #+#    #+#              #
+#    Updated: 2023/01/17 17:39:45 by bloisel          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = so_long
 LIBFTNAME = libft.a
 MLXNAME = libmlx.a
@@ -10,6 +22,10 @@ DEBUG = -g -O0
 SRCS = srcs/main.c \
 		srcs/read_map.c \
 		srcs/check_ber.c \
+		srcs/check_ber1.c \
+		srcs/check_ber2.c \
+		srcs/p_pictures.c \
+		srcs/p_mouvement.c \
 		srcs/ft_exit.c \
 		srcs/init_window.c 
 
